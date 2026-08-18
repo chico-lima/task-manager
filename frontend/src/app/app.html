@@ -1,0 +1,21 @@
+<div class="app-container">
+  <header class="hero">
+    <h1>Task Manager</h1>
+    <p>Organize projetos e acompanhe suas tarefas.</p>
+  </header>
+
+  <main class="content">
+
+    <div class="task-form-container" [class.editing-task]="taskListRef.editingTask() !== null">
+      <app-task-form (formSubmitted)="taskListRef.onFormSubmitted()"
+        [taskToEdit]="taskListRef.editingTask()"></app-task-form>
+    </div>
+
+    <app-task-list #taskListRef></app-task-list>
+
+  </main>
+
+  <footer>
+    <p>feito por Francisco Lima</p>
+  </footer>
+</div>

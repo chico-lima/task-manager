@@ -1,0 +1,76 @@
+<div [class.editing-project]="editingProject() !== null">
+    <app-project-form [projectToEdit]="editingProject()" (formSubmitted)="onProjectFormSubmitted()">
+    </app-project-form>
+</div>
+
+<div class="projects">
+    <h2>Projetos</h2>
+
+    <ul>
+        <li *ngFor="let project of projectService.projects()" [class.selected]="selectedProject() === project.id">
+            {{ project.name }}
+
+            <span class="project-description" (click)="setProject(project.id)">-
+                {{ project.description }}
+            </span>
+
+            <button (click)="startProjectEdit(project)">
+                Editar
+            </button>
+
+            <button (click)="deleteProject(project)">
+                Excluir
+            </button>
+        </li>
+    </ul>
+</div>
+
+<div class="task-list">
+    <h2>Tarefas</h2>
+
+    <div class="project-filter">
+        <label for="project">Projeto:</label>
+
+        <select id="project" [value]="selectedProject()" (change)="setProject(+$any($event.target).value || null)">
+            <option value="">Todos os projetos</option>
+
+            <option *ngFor="let project of projectService.projects()" [value]="project.id">
+                {{ project.name }}
+            </option>
+        </select>
+    </div>
+
+    <div class="filters">
+        <button [class.active]="filter() === 'all'" (click)="setFilter('all')">
+            Todas
+        </button>
+        <button [class.active]="filter() === 'pending'" (click)="setFilter('pending')">
+            Pendentes
+        </button>
+        <button [class.active]="filter() === 'completed'" (click)="setFilter('completed')">
+            Concluídas
+        </button>
+    </div>
+
+    <ul>
+        <li *ngFor="let task of filteredTasks(); trackBy: trackByTaskId">
+            <input type="checkbox" [checked]="task.completed" (change)="toggleCompleted(task)" />
+
+            {{ task.title }}
+
+            <div class="task-info" [class.completed]="task.completed">
+
+                <div class="task-description" *ngIf="task.description">Descrição:
+                    {{ task.description }}
+                </div>
+            </div>
+
+            <button (click)="startEdit(task)">Editar</button>
+            <button (click)="deleteTask(task)">Excluir</button>
+        </li>
+    </ul>
+
+    <p *ngIf="filteredTasks().length === 0">
+        Nenhuma tarefa encontrada.
+    </p>
+</div>

@@ -1,0 +1,27 @@
+<div class="task-form">
+  <h2>{{ taskToEdit ? 'Editar tarefa' : 'Nova tarefa' }}</h2>
+
+  <form (ngSubmit)="onSubmit()">
+    <label>
+      Título:
+      <input type="text" [(ngModel)]="title" name="title" required />
+    </label>
+    <label>
+      Descrição:
+      <input type="text" [(ngModel)]="description" name="description" />
+    </label>
+
+    <label>
+      Projeto:
+      <select [(ngModel)]="selectedProjectId" name="project" required>
+        <option [ngValue]="null" disabled>Selecione um projeto</option>
+        <option *ngFor="let project of projectService.projects()" [ngValue]="project.id">
+          {{ project.name }}
+        </option>
+      </select>
+    </label>
+
+    <button type="submit">{{ taskToEdit ? 'Salvar edição' : 'Criar tarefa' }}</button>
+    <button type="button" *ngIf="taskToEdit" (click)="onCancel()">Cancelar</button>
+  </form>
+</div>

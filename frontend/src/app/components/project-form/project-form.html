@@ -1,0 +1,37 @@
+<div class="project-form">
+    <h2>{{ projectToEdit ? 'Editar projeto' : 'Novo projeto' }}</h2>
+    
+    <form (ngSubmit)="onSubmit()">
+
+        <label>
+            Nome:
+            <input
+                type="text"
+                [(ngModel)]="name"
+                name="name"
+                required
+            />
+        </label>
+
+        <label>
+            Descrição:
+            <textarea
+                [(ngModel)]="description"
+                name="description"
+            ></textarea>
+        </label>
+
+        <button type="submit">
+            {{ projectToEdit ? 'Salvar edição' : 'Criar projeto' }}
+        </button>
+
+        <button
+            type="button"
+            *ngIf="projectToEdit"
+            (click)="onCancel()"
+        >
+            Cancelar
+        </button>
+
+    </form>
+</div>
