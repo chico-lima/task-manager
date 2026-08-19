@@ -31,14 +31,28 @@ A aplicação está atualmente hospedada em uma VM Ubuntu na Oracle Cloud Infras
 
 A estrutura do deploy utiliza Docker Compose para executar o frontend, backend e banco de dados. O Nginx recebe as requisições externas e encaminha cada uma para o serviço correspondente.
 
-```text
-Internet
-   ↓
-Nginx :80
-   ├── /      → Angular :4200
-   └── /api/  → Django :8000
-                    ↓
-                PostgreSQL
+```mermaid
+flowchart TB
+    Compose[Docker Compose]
+
+    Compose --> Frontend[Frontend<br/>Angular]
+    Compose --> Backend[Backend<br/>Django]
+    Compose --> DB[(PostgreSQL)]
+
+    Frontend -->|HTTP| Backend
+    Backend -->|SQL| DB
+```
+## Arquitetura
+
+```mermaid
+
+flowchart LR
+    User[Usuário / Navegador] --> Nginx[Nginx :80]
+
+    Nginx --> Frontend[Angular :4200]
+    Nginx --> Backend[Django :8000]
+
+    Backend --> DB[(PostgreSQL :5432)]
 ```
 
 ## API
