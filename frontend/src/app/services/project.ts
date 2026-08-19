@@ -7,11 +7,11 @@ import { Project } from '../models/projects';
   providedIn: 'root'
 })
 export class ProjectService {
-  private apiUrl = 'http://129.213.110.12:8000/api/projects/';
+  private apiUrl = '/api/projects/';
 
   projects = signal<Project[]>([]);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getProjects(): Observable<Project[]> {
     return this.http.get<Project[]>(this.apiUrl).pipe(

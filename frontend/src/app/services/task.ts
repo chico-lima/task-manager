@@ -7,7 +7,7 @@ import { Task } from '../models/tasks';
     providedIn: 'root'
 })
 export class TaskService {
-    private apiUrl = 'http://129.213.110.12:8000/api/tasks/';
+    private apiUrl = '/api/tasks/';
 
     tasks = signal<Task[]>([]);
 
