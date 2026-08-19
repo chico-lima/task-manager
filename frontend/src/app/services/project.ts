@@ -7,7 +7,7 @@ import { Project } from '../models/projects';
   providedIn: 'root'
 })
 export class ProjectService {
-  private apiUrl = 'http://127.0.0.1:8000/api/projects/';
+  private apiUrl = 'http://129.213.110.12:8000/api/projects/';
 
   projects = signal<Project[]>([]);
 

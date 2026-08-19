@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-zpg&3f5(-w-*rzcly^+jyp9ktq#^1_pe5!j%*li3d)r19jj^ha
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['129.213.110.12']
 
 
 # Application definition
@@ -136,5 +136,5 @@ MAILERS = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:4200',
+    'http://129.213.110.12:4200',
 ]
